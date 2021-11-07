@@ -1,12 +1,20 @@
 package com.epam.brest.model;
 
 public class Car {
+    private Integer idCar;
     private String model;
     private String color;
     private Integer yearOfIssue;
     private Integer mileage;
     private String carNumber;
 
+    public Integer getIdCar() {
+        return idCar;
+    }
+
+    public void setIdCar(Integer idCar) {
+        this.idCar = idCar;
+    }
 
     public String getModel() {
         return model;
