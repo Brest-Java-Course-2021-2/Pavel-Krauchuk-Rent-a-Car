@@ -4,7 +4,7 @@ import com.epam.brest.model.CarOrder;
 
 import java.util.List;
 
-public class CarOrderDaoJDSBImpl implements CarOrderDao{
+public class CarOrderDaoJDBCImpl implements CarOrderDao{
     @Override
     public List<CarOrder> findAll() {
         return null;
