@@ -5,8 +5,15 @@ public class Car {
     private String model;
     private String color;
     private Integer yearOfIssue;
-    private Integer mileage;
     private String carNumber;
+
+    public Car(Integer idCar, String model, String color, Integer yearOfIssue, String carNumber) {
+        this.idCar = idCar;
+        this.model = model;
+        this.color = color;
+        this.yearOfIssue = yearOfIssue;
+        this.carNumber = carNumber;
+    }
 
     public Integer getIdCar() {
         return idCar;
@@ -38,14 +45,6 @@ public class Car {
 
     public void setYearOfIssue(Integer yearOfIssue) {
         this.yearOfIssue = yearOfIssue;
-    }
-
-    public Integer getMileage() {
-        return mileage;
-    }
-
-    public void setMileage(Integer mileage) {
-        this.mileage = mileage;
     }
 
     public String getCarNumber() {

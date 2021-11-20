@@ -9,6 +9,15 @@ public class Customer {
     private Integer phoneNumber;
     private String address;
 
+    public Customer(Integer cusomerId, String firstName, String lastName, Integer numberDriverLicense, Integer phoneNumber, String address) {
+        this.cusomerId = cusomerId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.numberDriverLicense = numberDriverLicense;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+    }
+
     public Integer getCusomerId() {
         return cusomerId;
     }

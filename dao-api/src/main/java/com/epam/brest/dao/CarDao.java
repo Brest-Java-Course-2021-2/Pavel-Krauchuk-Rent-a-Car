@@ -12,4 +12,6 @@ public interface CarDao {
 
     Integer update(Car car);
 
+    Integer delete (Car car);
+
 }

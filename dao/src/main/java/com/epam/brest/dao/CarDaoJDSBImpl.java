@@ -4,7 +4,7 @@ import com.epam.brest.model.Car;
 
 import java.util.List;
 
-public class CarDaoJDSImpl implements CarDao{
+public class CarDaoJDSBImpl implements CarDao{
     @Override
     public List<Car> findAll() {
         return null;
@@ -17,6 +17,11 @@ public class CarDaoJDSImpl implements CarDao{
 
     @Override
     public Integer update(Car car) {
+        return null;
+    }
+
+    @Override
+    public Integer delete(Car car) {
         return null;
     }
 }
