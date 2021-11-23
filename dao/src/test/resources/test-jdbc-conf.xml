@@ -4,8 +4,8 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        https://www.springframework.org/schema/beans/spring-beans.xsd">
 
-
     <bean name="carDao" class="com.epam.brest.dao.CarDaoJDBCImpl">
-    <constructor-arg name="dataSourse" ref="dataSource"/>
+        <constructor-arg name="dataSource" ref="dataSource"/>
     </bean>
+
 </beans>

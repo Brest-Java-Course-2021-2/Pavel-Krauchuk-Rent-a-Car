@@ -1,26 +1,41 @@
 package com.epam.brest.model;
 
 public class Car {
-    private Integer idCar;
+    private Integer carId;
     private String model;
     private String color;
-    private Integer yearOfIssue;
-    private String carNumber;
 
-    public Car(Integer idCar, String model, String color, Integer yearOfIssue, String carNumber) {
-        this.idCar = idCar;
+    public Car(String model, String color, Integer yearOfIssue, String carNumber) {
         this.model = model;
         this.color = color;
         this.yearOfIssue = yearOfIssue;
         this.carNumber = carNumber;
     }
 
-    public Integer getIdCar() {
-        return idCar;
+    private Integer yearOfIssue;
+    private String carNumber;
+
+    public Car(String model) {
+        this.model = model;
     }
 
-    public void setIdCar(Integer idCar) {
-        this.idCar = idCar;
+    public Car(Integer carId, String model, String color, Integer yearOfIssue, String carNumber) {
+        this.carId = carId;
+        this.model = model;
+        this.color = color;
+        this.yearOfIssue = yearOfIssue;
+        this.carNumber = carNumber;
+    }
+
+    public Car() {
+    }
+
+    public Integer getCarId() {
+        return carId;
+    }
+
+    public void setCarId(Integer carId) {
+        this.carId = carId;
     }
 
     public String getModel() {

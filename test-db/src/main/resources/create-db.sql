@@ -1,9 +1,9 @@
 DROP TABLE IF EXISTS car;
 CREATE TABLE car (
-    idCar INT NOT NULL AUTO_INCREMENT,
-    model VARCHAR(20) NOT NULL,
-    color VARCHAR(20) NOT NULL,
-    yearOfIssue INT NOT NULL,
-    carNumber VARCHAR(7) NOT NULL,
-    PRIMARY KEY (idCar)
+    car_id INT NOT NULL auto_increment,
+    model VARCHAR(255) NOT NULL,
+    color VARCHAR(255),
+    year_of_issue INT,
+    car_number VARCHAR(7) UNIQUE,
+    CONSTRAINT car_pk PRIMARY KEY (car_id)
 );
