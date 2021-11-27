@@ -1,6 +1,8 @@
 package com.epam.brest.dao;
 
 import com.epam.brest.model.Car;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -16,10 +18,13 @@ import java.util.List;
 
 public class CarDaoJDBCImpl implements CarDao{
 
+    private final Logger logger = LogManager.getLogger(CarDaoJDBCImpl.class);
+
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     private final String SQL_ALL_CARS="select d.car_id, d.model, d.color, d.year_of_issue, d.car_number from car d order by d.model";
     private final String SQL_CREATE_CAR = "insert into car (model) values(:model)";
+    private  final String SQL_CHECK_UNIQUE_CAR_NUMBER = "select count(d.carNumber) from car d where d.car_number = :carNumber";
 
     public CarDaoJDBCImpl (DataSource dataSource) {
         this.namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
@@ -27,19 +32,26 @@ public class CarDaoJDBCImpl implements CarDao{
 
     @Override
     public List<Car> findAll() {
+        logger.debug("DEBUG MASSAGE");
 
         return namedParameterJdbcTemplate.query(SQL_ALL_CARS, new CarRowMapper());
     }
 
     @Override
     public Integer create(Car car) {
+        logger.debug("Start: creat({})", car);
 
-        SqlParameterSource sqlParameterSource = new MapSqlParameterSource("model", car.getModel());
+        SqlParameterSource sqlParameterSource = new MapSqlParameterSource("model", car.getModel().toUpperCase());
         KeyHolder keyHolder = new GeneratedKeyHolder();
         namedParameterJdbcTemplate.update(SQL_CREATE_CAR, sqlParameterSource, keyHolder);
         return (Integer) keyHolder.getKey();
     }
 
+    private boolean isCarNumberUnique(String carNumber) {
+        logger.debug("Check CarNumber: {} on unique", carNumber);
+        SqlParameterSource sqlParameterSource = new MapSqlParameterSource("carNumber", carNumber);
+        return namedParameterJdbcTemplate.queryForObject(SQL_CHECK_UNIQUE_CAR_NUMBER, sqlParameterSource, Integer.class)==0;
+    }
     @Override
     public Integer update(Car car) {
         return null;
