@@ -2,7 +2,7 @@ package com.epam.brest.model;
 
 public class Customer {
 
-    private Integer cusomerId;
+    private Integer customerId;
     private String firstName;
     private String lastName;
     private Integer numberDriverLicense;
@@ -10,7 +10,7 @@ public class Customer {
     private String address;
 
     public Customer(Integer cusomerId, String firstName, String lastName, Integer numberDriverLicense, Integer phoneNumber, String address) {
-        this.cusomerId = cusomerId;
+        this.customerId = cusomerId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.numberDriverLicense = numberDriverLicense;
@@ -19,11 +19,11 @@ public class Customer {
     }
 
     public Integer getCusomerId() {
-        return cusomerId;
+        return customerId;
     }
 
     public void setCusomerId(Integer cusomerId) {
-        this.cusomerId = cusomerId;
+        this.customerId = cusomerId;
     }
 
     public String getFirstName() {

@@ -2,7 +2,6 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd
         http://www.springframework.org/schema/beans
@@ -17,38 +16,8 @@
     <mvc:annotation-driven/>
 
     <!-- Component scan for @Controller, @Service... annotations -->
-    <context:component-scan base-package="com.epam.brest.*"/>
+    <context:component-scan base-package="com.epam.brest*"/>
 
-    <import resource="classpath*:test-db.xml"/>
-
-    <bean id="namedParameterJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
-        <constructor-arg ref="dataSource"/>
-    </bean>
-
-    <bean id="departmentDtoDao" class="com.epam.brest.dao.DepartmentDtoDaoJdbc">
-        <constructor-arg ref="namedParameterJdbcTemplate"/>
-    </bean>
-
-    <bean id="departmentDtoService" class="com.epam.brest.service.impl.DepartmentDtoServiceImpl">
-        <constructor-arg name="departmentDtoDao" ref="departmentDtoDao"/>
-    </bean>
-
-    <bean id="departmentDao" class="com.epam.brest.dao.DepartmentDaoJDBCImpl">
-        <constructor-arg ref="namedParameterJdbcTemplate"/>
-    </bean>
-
-    <bean id="departmentService" class="com.epam.brest.service.impl.DepartmentServiceImpl">
-        <constructor-arg name="departmentDao" ref="departmentDao"/>
-    </bean>
-
-    <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
-        <property name="locations">
-            <list>
-                <value>classpath*:test-db.properties</value>
-                <value>classpath*:sql-department.properties</value>
-            </list>
-        </property>
-    </bean>
     <!-- Thymeleaf Template Resolver -->
     <bean id="templateResolver"
           class="org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver">
@@ -76,8 +45,4 @@
         <property name="characterEncoding" value="UTF-8" />
     </bean>
 
-    <bean id="messageSource"
-          class="org.springframework.context.support.ReloadableResourceBundleMessageSource"
-          p:basename="/WEB-INF/messages">
-    </bean>
 </beans>
