@@ -10,6 +10,9 @@ public class CarOrder {
     private Car car;
     private OrderStatus orderStatus;
 
+    public CarOrder() {
+    }
+
     public CarOrder(Integer orderCarId, Date date, Customer customer, Car car, OrderStatus orderStatus) {
         this.orderCarId = orderCarId;
         this.date = date;

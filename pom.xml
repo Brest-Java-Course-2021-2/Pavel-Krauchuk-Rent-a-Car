@@ -17,6 +17,7 @@
         <module>web-app</module>
         <module>rest</module>
         <module>service-api</module>
+        <module>service</module>
     </modules>
 
     <properties>
@@ -26,6 +27,7 @@
         <spring.version>5.3.4</spring.version>
         <log4j2.version>2.14.1</log4j2.version>
         <thymeleaf-spring5.version>3.0.12.RELEASE</thymeleaf-spring5.version>
+        <commons-lang3.version>3.12.0</commons-lang3.version>
     </properties>
 
     <dependencyManagement>
@@ -110,6 +112,15 @@
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <version>1.4.200</version>
+        </dependency>
+        <!--            tests-->
+
+        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3.version}</version>
+            <scope>test</scope>
         </dependency>
 
         <dependency>

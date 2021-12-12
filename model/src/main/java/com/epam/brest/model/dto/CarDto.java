@@ -1,8 +1,9 @@
-package com.epam.brest.model;
+package com.epam.brest.model.dto;
 
 import java.math.BigDecimal;
 
-public class Car {
+public class CarDto {
+
     private Integer carId;
     private String model;
     private String color;
@@ -10,28 +11,15 @@ public class Car {
     private String carNumber;
     private BigDecimal price;
 
-    public Car(String model) {
-        this.model = model;
+    public CarDto() {
     }
 
-    public Car(Integer carId, String model, String color, BigDecimal price, Integer yearOfIssue, String carNumber) {
-        this.carId = carId;
+    public CarDto(String model, String color, Integer yearOfIssue, String carNumber, BigDecimal price) {
         this.model = model;
         this.color = color;
+        this.yearOfIssue = yearOfIssue;
+        this.carNumber = carNumber;
         this.price = price;
-        this.yearOfIssue = yearOfIssue;
-        this.carNumber = carNumber;
-    }
-
-    public Car(Integer carId, String model, String color, Integer yearOfIssue, String carNumber) {
-        this.carId = carId;
-        this.model = model;
-        this.color = color;
-        this.yearOfIssue = yearOfIssue;
-        this.carNumber = carNumber;
-    }
-
-    public Car() {
     }
 
     public Integer getCarId() {
@@ -80,5 +68,12 @@ public class Car {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    @Override
+    public String toString(){
+        return "CarDto{" + "carId=" + carId + '\'' + "model=" + model + '\''
+                + "color=" + color + '\'' + "yearOfIssue=" + yearOfIssue + '\''
+                + "carNumber=" + carNumber + '\'' + "price" + price + '}';
     }
 }

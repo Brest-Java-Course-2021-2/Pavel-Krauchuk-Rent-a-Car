@@ -25,5 +25,4 @@ public class CarValidator implements Validator {
             errors.rejectValue("model", "model.maxSize");
         }
     }
-
 }

@@ -25,6 +25,7 @@ public class CarDaoJDBCImpl implements CarDao{
     private final String SQL_ALL_CARS="select d.car_id, d.model, d.color, d.year_of_issue, d.car_number from car d order by d.model";
     private final String SQL_CREATE_CAR = "insert into car (model) values(:model)";
     private  final String SQL_CHECK_UNIQUE_CAR_NUMBER = "select count(d.carNumber) from car d where d.car_number = :carNumber";
+    private final String SQL_CAR_BY_ID = "select d.car_id, d.model from car d where car_id = :carId";
 
     public CarDaoJDBCImpl (DataSource dataSource) {
         this.namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
@@ -55,6 +56,13 @@ public class CarDaoJDBCImpl implements CarDao{
     @Override
     public Integer update(Car car) {
         return null;
+    }
+
+    @Override
+    public Car getCarById (Integer carId){
+        logger.debug("Get car by id = {}", carId);
+        SqlParameterSource sqlParameterSource = new MapSqlParameterSource("carId", carId);
+        return namedParameterJdbcTemplate.queryForObject( SQL_CAR_BY_ID, sqlParameterSource, new CarRowMapper());
     }
 
     @Override

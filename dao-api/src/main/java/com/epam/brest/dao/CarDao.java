@@ -14,4 +14,5 @@ public interface CarDao {
 
     Integer delete (Car car);
 
+    Car getCarById(Integer carId);
 }
