@@ -7,18 +7,14 @@ public class CarDto {
     private Integer carId;
     private String model;
     private String color;
-    private Integer yearOfIssue;
-    private String carNumber;
     private BigDecimal price;
 
     public CarDto() {
     }
 
-    public CarDto(String model, String color, Integer yearOfIssue, String carNumber, BigDecimal price) {
+    public CarDto(String model, String color, BigDecimal price) {
         this.model = model;
         this.color = color;
-        this.yearOfIssue = yearOfIssue;
-        this.carNumber = carNumber;
         this.price = price;
     }
 
@@ -46,22 +42,6 @@ public class CarDto {
         this.color = color;
     }
 
-    public Integer getYearOfIssue() {
-        return yearOfIssue;
-    }
-
-    public void setYearOfIssue(Integer yearOfIssue) {
-        this.yearOfIssue = yearOfIssue;
-    }
-
-    public String getCarNumber() {
-        return carNumber;
-    }
-
-    public void setCarNumber(String carNumber) {
-        this.carNumber = carNumber;
-    }
-
     public BigDecimal getPrice() {
         return price;
     }
@@ -71,9 +51,13 @@ public class CarDto {
     }
 
     @Override
-    public String toString(){
-        return "CarDto{" + "carId=" + carId + '\'' + "model=" + model + '\''
-                + "color=" + color + '\'' + "yearOfIssue=" + yearOfIssue + '\''
-                + "carNumber=" + carNumber + '\'' + "price" + price + '}';
+    public String toString() {
+        return "CarDto{" +
+                "carId=" + carId +
+                ", model='" + model + '\'' +
+                ", color='" + color + '\'' +
+                ", price=" + price +
+                '}';
     }
 }
+

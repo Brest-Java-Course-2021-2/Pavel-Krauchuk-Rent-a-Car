@@ -1,4 +1,4 @@
-package com.epam.brest.model;
+package com.epam.brest.model.dto;
 
 public class Customer {
 
@@ -7,19 +7,21 @@ public class Customer {
     private String lastName;
     private String address;
 
-    public Customer(Integer cusomerId, String firstName, String lastName, String address) {
-        this.customerId = cusomerId;
+    public Customer(Integer customerId){
+    }
+
+    public Customer(String firstName, String lastName, String address) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
     }
 
-    public Integer getCusomerId() {
+    public Integer getCustomerId() {
         return customerId;
     }
 
-    public void setCusomerId(Integer cusomerId) {
-        this.customerId = cusomerId;
+    public void setCustomerId(Integer customerId) {
+        this.customerId = customerId;
     }
 
     public String getFirstName() {
@@ -44,5 +46,15 @@ public class Customer {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "customerId=" + customerId +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", address='" + address + '\'' +
+                '}';
     }
 }

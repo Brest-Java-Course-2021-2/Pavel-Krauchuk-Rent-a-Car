@@ -11,11 +11,8 @@ public class CarDtoDaoJdbc implements CarDtoDao{
 
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-    private String findAllWithAvgPriceSql = "SELECT\n" +
-            "\td.car_id AS carId,\n" +
-            "\td.model AS model,\n" +
-            "\td.price AS price\n";
-
+    @Value("${findAllWithAvgPriceSql}")
+    private String findAllWithAvgPriceSql;
 
     public CarDtoDaoJdbc(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
@@ -27,3 +24,9 @@ public class CarDtoDaoJdbc implements CarDtoDao{
         return cars;
     }
 }
+
+
+
+
+
+

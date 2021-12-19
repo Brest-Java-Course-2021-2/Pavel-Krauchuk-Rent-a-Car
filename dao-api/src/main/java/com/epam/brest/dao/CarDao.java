@@ -12,7 +12,7 @@ public interface CarDao {
 
     Integer update(Car car);
 
-    Integer delete (Car car);
+    Integer delete (Integer carId);
 
     Car getCarById(Integer carId);
 }

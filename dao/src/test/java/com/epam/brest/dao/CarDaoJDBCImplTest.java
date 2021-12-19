@@ -11,6 +11,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
@@ -33,9 +35,44 @@ class CarDaoJDBCImplTest {
     void create() {
         assertNotNull(carDaoJDBC);
         Integer carSizeBefore = carDaoJDBC.findAll().size();
-        Car car = new Car(32000,"SKODA", "GREEN", 2015, "6666KM1");
+        Car car = new Car(32000,"SKODA", "GREEN");
         Integer newCarId = carDaoJDBC.create(car);
         assertNotNull(newCarId);
         assertEquals((int) carSizeBefore, carDaoJDBC.findAll().size() - 1);
+    }
+
+    @Test
+    void getCarById() {
+        List<Car> cars = carDaoJDBC.findAll();
+        if (cars.size()==0){
+            carDaoJDBC.create(new Car("Model T"));
+            cars = carDaoJDBC.findAll();
+        }
+        Car carSrc = cars.get(0);
+        Car carDst = carDaoJDBC.getCarById(carSrc.getCarId());
+        assertEquals(carSrc.getModel(), carDst.getModel());
+    }
+
+    @Test
+    void update() {
+        List<Car> cars = carDaoJDBC.findAll();
+        if (cars.size()==0){
+            carDaoJDBC.create(new Car("Model T"));
+            cars = carDaoJDBC.findAll();
+        }
+        Car carSrc = cars.get(0);
+        carSrc.setModel(carSrc.getModel()+"_TEST");
+        carDaoJDBC.update(carSrc);
+
+        Car carDrt = carDaoJDBC.getCarById(carSrc.getCarId());
+        assertEquals(carSrc.getModel(), carDrt.getModel());
+    }
+
+    @Test
+    void delete() {
+        carDaoJDBC.create(new Car("Model T"));
+        List<Car> cars = carDaoJDBC.findAll();
+        carDaoJDBC.delete(cars.get(cars.size()-1).getCarId());
+        assertEquals(cars.size()-1, carDaoJDBC.findAll().size());
     }
 }
