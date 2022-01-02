@@ -12,5 +12,5 @@ public interface CarOrderDao {
 
     Integer update(CarOrder carOrder);
 
-    Integer delete (CarOrder carOrder);
+    Integer delete (Integer carOrder);
 }

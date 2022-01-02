@@ -9,9 +9,9 @@ public interface CustomerDao {
 
     List<Customer> findAll();
 
-    Integer create(Car car);
+    Integer create(Customer customer);
 
-    Integer update(Car car);
+    Integer update(Customer customer);
 
-    Integer delete (Car car);
+    Integer delete (Integer customerId);
 }

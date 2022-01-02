@@ -21,7 +21,7 @@ public class CarOrderDaoJDBCImpl implements CarOrderDao{
     }
 
     @Override
-    public Integer delete(CarOrder carOrder) {
+    public Integer delete(Integer carOrder) {
         return null;
     }
 }

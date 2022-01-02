@@ -19,7 +19,7 @@ public class CarDtoDaoJdbc implements CarDtoDao{
     }
 
     @Override
-    public List<CarDto> findAllWithAvgPrice() {
+    public List<CarDto> findTotalPrice() {
         List<CarDto> cars = namedParameterJdbcTemplate.query(findAllWithAvgPriceSql, BeanPropertyRowMapper.newInstance(CarDto.class));
         return cars;
     }

@@ -8,11 +8,12 @@ public interface CarDao {
 
     List<Car> findAll();
 
+    Car getCarById(Integer carId);
+
     Integer create(Car car);
 
     Integer update(Car car);
 
     Integer delete (Integer carId);
 
-    Car getCarById(Integer carId);
 }

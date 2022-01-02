@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface CarDtoService {
 
-    List<CarDto> findAllWithPrice();
+    List<CarDto> exposeTotalPrice();
 }
