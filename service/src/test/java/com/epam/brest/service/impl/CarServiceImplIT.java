@@ -8,7 +8,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(locations = {"classpath*:test-db.xml", "classpath*:service-context-test.xml"})
+@ContextConfiguration(locations = {"classpath*:service-context-test.xml", "classpath*:test-db.xml"})
 @Transactional
 class CarServiceImplIT {
 

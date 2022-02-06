@@ -1,8 +1,10 @@
 package com.epam.brest.service.impl;
 
-import com.epam.brest.dao.CarDao;
-import com.epam.brest.model.Car;
-import com.epam.brest.service.CarService;
+import com.epam.brest.service.exceptions.CarNotFoundException;
+import com.epam.rest.dao.CarDao;
+import com.epam.rest.model.Car;
+import com.epam.rest.service.CarService;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,8 +20,13 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Car getCarById(Integer carId) {
-        return this.carDao.getCarById(carId);
+        try {
+            return this.carDao.getCarById(carId);
+        } catch (EmptyResultDataAccessException e) {
+            throw new CarNotFoundException(carId);
+        }
     }
 
     @Override
@@ -29,11 +36,13 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
+    @Transactional
     public Integer update(Car car) {
         return this.carDao.update(car);
     }
 
     @Override
+    @Transactional
     public Integer delete(Integer carId) {
         return this.carDao.delete(carId);
     }

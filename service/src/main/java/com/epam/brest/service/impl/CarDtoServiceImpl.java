@@ -1,7 +1,8 @@
-package src.main.java.com.epam.brest.service.impl;
+package com.epam.brest.service.impl;
 
-import com.epam.brest.dao.CarDtoDao;
-import com.epam.brest.service.CarDtoService;
+import com.epam.rest.dao.CarDtoDao;
+import com.epam.rest.model.dto.CarDto;
+import com.epam.rest.service.CarDtoService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,6 +11,7 @@ import java.util.List;
 @Service
 @Transactional
 public class CarDtoServiceImpl implements CarDtoService {
+
     private final CarDtoDao carDtoDao;
 
     public CarDtoServiceImpl(CarDtoDao carDtoDao) {
@@ -17,7 +19,7 @@ public class CarDtoServiceImpl implements CarDtoService {
     }
 
     @Override
-    public List<com.epam.brest.model.dto.CarDto> exposeTotalPrice() {
-        return null;
+    public List<CarDto> findByPrice() {
+        return this.carDtoDao.findByPrice();
     }
 }
