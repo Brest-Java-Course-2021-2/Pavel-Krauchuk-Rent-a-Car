@@ -6,11 +6,11 @@ import java.util.List;
 
 public interface CarOrderDao {
 
-    List<CarOrder> findAll();
+    List<CarOrder> findAllOrder();
 
-    Integer create(CarOrder carOrder);
+    Integer createOrder(CarOrder carOrder);
 
-    Integer update(CarOrder carOrder);
+    Integer updateOrder(CarOrder carOrder);
 
-    Integer delete (Integer carOrder);
+    Integer deleteOrder (Integer carOrder);
 }

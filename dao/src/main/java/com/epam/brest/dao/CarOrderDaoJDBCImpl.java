@@ -6,22 +6,22 @@ import java.util.List;
 
 public class CarOrderDaoJDBCImpl implements CarOrderDao{
     @Override
-    public List<CarOrder> findAll() {
+    public List<CarOrder> findAllOrder() {
         return null;
     }
 
     @Override
-    public Integer create(CarOrder carOrder) {
+    public Integer createOrder(CarOrder carOrder) {
         return null;
     }
 
     @Override
-    public Integer update(CarOrder carOrder) {
+    public Integer updateOrder(CarOrder carOrder) {
         return null;
     }
 
     @Override
-    public Integer delete(Integer carOrder) {
+    public Integer deleteOrder(Integer carOrder) {
         return null;
     }
 }

@@ -17,7 +17,7 @@ public class CarValidator implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
 
-        ValidationUtils.rejectIfEmpty(errors, "moel", "model.empty");
+        ValidationUtils.rejectIfEmpty(errors, "model", "model.empty");
         Car car = (Car) target;
 
         if (StringUtils.hasLength(car.getModel())

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -14,10 +15,10 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(locations = {"classpath*:test-db.xml", "classpath*:test-jdbc-conf.xml"})
-class CarDaoJDBCImplTest {
+class CarDaoJDBCImplTestIT {
     private final CarDaoJDBCImpl carDaoJDBC;
 
-    public CarDaoJDBCImplTest(@Autowired CarDao carDaoJDBC) {
+    public CarDaoJDBCImplTestIT(@Autowired CarDao carDaoJDBC) {
         this.carDaoJDBC = (CarDaoJDBCImpl) carDaoJDBC;
     }
     @Test
@@ -29,7 +30,7 @@ class CarDaoJDBCImplTest {
    void create() {
        assertNotNull(carDaoJDBC);
        Integer carSizeBefore = carDaoJDBC.findAll().size();
-       Car car = new Car("KIA");
+       Car car = new Car("KIA", BigDecimal.valueOf(14.49));
        Integer newCarId = carDaoJDBC.create(car);
        assertNotNull(newCarId);
        assertEquals((int) carSizeBefore, carDaoJDBC.findAll().size() - 1);
@@ -39,7 +40,7 @@ class CarDaoJDBCImplTest {
    void getCarById() {
        List<Car> cars = carDaoJDBC.findAll();
        if (cars.size()==0){
-           carDaoJDBC.create(new Car("Model T"));
+           carDaoJDBC.create(new Car("Model T", BigDecimal.valueOf(99.99)));
            cars = carDaoJDBC.findAll();
        }
        Car carSrc = cars.get(0);
@@ -51,7 +52,7 @@ class CarDaoJDBCImplTest {
    void update() {
        List<Car> cars = carDaoJDBC.findAll();
        if (cars.size()==0){
-           carDaoJDBC.create(new Car("Model T"));
+           carDaoJDBC.create(new Car("Model T", BigDecimal.valueOf(99.99)));
            cars = carDaoJDBC.findAll();
        }
        Car carSrc = cars.get(0);
@@ -64,7 +65,7 @@ class CarDaoJDBCImplTest {
 
    @Test
    void delete() {
-       carDaoJDBC.create(new Car("Model T"));
+       carDaoJDBC.create(new Car("Model T", BigDecimal.valueOf(99.99)));
        List<Car> cars = carDaoJDBC.findAll();
        carDaoJDBC.delete(cars.get(cars.size()-1).getCarId());
        assertEquals(cars.size()-1, carDaoJDBC.findAll().size());

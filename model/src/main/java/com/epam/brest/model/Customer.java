@@ -7,12 +7,27 @@ public class Customer {
     private String lastName;
     private String address;
 
+    public Customer() {
+    }
+
+    public Customer(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    public Customer(String firstName, String lastName, String address) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+    }
+
     public Customer(Integer cusomerId, String firstName, String lastName, String address) {
         this.customerId = cusomerId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
     }
+
 
     public Integer getCusomerId() {
         return customerId;

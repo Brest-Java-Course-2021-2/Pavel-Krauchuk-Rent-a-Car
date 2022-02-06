@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface CarDtoDao {
 
-    List<CarDto> findTotalPrice();
+    List<CarDto> findByPrice();
 }

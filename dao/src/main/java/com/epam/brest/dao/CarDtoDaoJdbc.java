@@ -11,16 +11,16 @@ public class CarDtoDaoJdbc implements CarDtoDao{
 
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-    @Value("${findAllWithAvgPriceSql}")
-    private String findAllWithAvgPriceSql;
+    @Value("${findByPriceSql}")
+    private String findByPriceSql;
 
     public CarDtoDaoJdbc(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
 
     @Override
-    public List<CarDto> findTotalPrice() {
-        List<CarDto> cars = namedParameterJdbcTemplate.query(findAllWithAvgPriceSql, BeanPropertyRowMapper.newInstance(CarDto.class));
+    public List<CarDto> findByPrice() {
+        List<CarDto> cars = namedParameterJdbcTemplate.query(findByPriceSql, BeanPropertyRowMapper.newInstance(CarDto.class));
         return cars;
     }
 }

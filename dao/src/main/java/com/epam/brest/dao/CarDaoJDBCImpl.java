@@ -34,9 +34,6 @@ public class CarDaoJDBCImpl implements CarDao{
     @Value("${SQL_DELETE_CAR_BY_ID}")
     private String sqlDeleteCarById;
 
-    @Value("${SQL_CAR_COUNT}")
-    private String sqlCarCount;
-
     public CarDaoJDBCImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
@@ -54,7 +51,9 @@ public class CarDaoJDBCImpl implements CarDao{
 
     @Override
     public Integer create(Car car) {
-        SqlParameterSource sqlParameterSource = new MapSqlParameterSource("model", car.getModel().toUpperCase());
+        SqlParameterSource sqlParameterSource = new MapSqlParameterSource()
+            .addValue("model", car.getModel())
+            .addValue("price", car.getPrice());
         KeyHolder keyHolder = new GeneratedKeyHolder();
         namedParameterJdbcTemplate.update(sqlCreateCar, sqlParameterSource, keyHolder);
         return (Integer) keyHolder.getKey();
@@ -62,22 +61,20 @@ public class CarDaoJDBCImpl implements CarDao{
 
     @Override
     public Integer update(Car car) {
-        SqlParameterSource sqlParameterSource = new MapSqlParameterSource("model", car.getModel()).addValue("carId", car.getCarId());
+        SqlParameterSource sqlParameterSource = new MapSqlParameterSource()
+                .addValue("carId", car.getCarId())
+                .addValue("model", car.getModel())
+                .addValue("price", car.getPrice());
         return namedParameterJdbcTemplate.update(sqlUpdateModel, sqlParameterSource);
     }
 
     @Override
     public Integer delete(Integer carId) {
-        SqlParameterSource sqlParameterSource = new MapSqlParameterSource("carId", carId);
+        SqlParameterSource sqlParameterSource = new MapSqlParameterSource()
+                .addValue("carId", carId);
         return namedParameterJdbcTemplate.update(sqlDeleteCarById, sqlParameterSource);
     }
 
-//    @Override
-//    public Integer count(){
-//        logger.debug("count()");
-//        return namedParameterJdbcTemplate.queryForObject(sqlCarCount, new MapSqlParameterSource(), Integer.class);
-//    }
-//
     private class CarRowMapper implements RowMapper<Car> {
 
         @Override
@@ -85,6 +82,7 @@ public class CarDaoJDBCImpl implements CarDao{
             Car car = new Car();
             car.setCarId(resultSet.getInt("car_id"));
             car.setModel(resultSet.getString("model"));
+            car.setPrice(resultSet.getBigDecimal("price"));
             return car;
         }
     }
