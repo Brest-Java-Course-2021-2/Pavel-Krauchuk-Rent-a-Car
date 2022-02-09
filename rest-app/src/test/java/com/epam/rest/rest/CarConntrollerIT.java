@@ -1,8 +1,9 @@
 package com.epam.rest.rest;
 
-import com.epam.rest.model.Car;
-import com.epam.rest.exception.CustomExceptionHandler;
-import com.epam.rest.exception.ErrorResponse;
+import com.epam.brest.model.Car;
+import com.epam.brest.rest.CarController;
+import com.epam.brest.rest.exception.CustomExceptionHandler;
+import com.epam.brest.rest.exception.ErrorResponse;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -23,14 +24,11 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import java.util.List;
 import java.util.Optional;
 
-import static com.epam.rest.exception.CustomExceptionHandler.VALIDATION_ERROR;
-import static com.epam.rest.model.constants.CarConstants.CAR_NAME_SIZE;
-import static com.epam.rest.exception.CustomExceptionHandler.CAR_NOT_FOUND;
-import static com.epam.rest.exception.CustomExceptionHandler.VALIDATION_ERROR;
+import static com.epam.brest.model.constants.CarConstants.CAR_MODEL_SIZE;
+import static com.epam.brest.rest.exception.CustomExceptionHandler.CAR_NOT_FOUND;
+import static com.epam.brest.rest.exception.CustomExceptionHandler.VALIDATION_ERROR;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.mock.http.server.reactive.MockServerHttpRequest.put;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
@@ -49,7 +47,7 @@ public class CarConntrollerIT {
 
     private MockMvc mockMvc;
 
-    MockMvcCarService carService = new MockMvcCarService();
+    MockMvc carService = new MockMvc();
 
     @BeforeEach
     public void before() {
@@ -64,7 +62,7 @@ public class CarConntrollerIT {
     public void shouldFindAllCars() throws Exception {
 
         // given
-        Car car = new Car(RandomStringUtils.randomAlphabetic(CAR_NAME_SIZE));
+        Car car = new Car(RandomStringUtils.randomAlphabetic(CAR_MODEL_SIZE));
         Integer id = carService.create(car);
 
         // when
@@ -77,7 +75,7 @@ public class CarConntrollerIT {
 
     @Test
     public void shouldCreateCar() throws Exception {
-        Car car = new Car(RandomStringUtils.randomAlphabetic(CAR_NAME_SIZE));
+        Car car = new Car(RandomStringUtils.randomAlphabetic(CAR_MODEL_SIZE));
         Integer id = carService.create(car);
         assertNotNull(id);
     }
@@ -86,16 +84,16 @@ public class CarConntrollerIT {
     public void shouldFindCarById() throws Exception {
 
         // given
-        Car car = new Car(RandomStringUtils.randomAlphabetic(CAR_NAME_SIZE));
+        Car car = new Car(RandomStringUtils.randomAlphabetic(CAR_MODEL_SIZE));
         Integer id = carService.create(car);
 
         assertNotNull(id);
 
         // when
-        Optional<Car> optionalDepartment = carService.findById(id);
+        Optional<Car> optionalCar = carService.findById(id);
 
         // then
-        assertTrue(optionalDepartment.isPresent());
+        assertTrue(optionalCar.isPresent());
         assertEquals(optionalCar.get().getCarId(), id);
         assertEquals(car.getModel(), optionalCar.get().getModel());
     }
@@ -104,7 +102,7 @@ public class CarConntrollerIT {
     public void shouldUpdateCar() throws Exception {
 
         // given
-        Car car = new Car(RandomStringUtils.randomAlphabetic(CAR_NAME_SIZE));
+        Car car = new Car(RandomStringUtils.randomAlphabetic(CAR_MODEL_SIZE));
         Integer id = carService.create(car);
         assertNotNull(id);
 
@@ -112,7 +110,7 @@ public class CarConntrollerIT {
         assertTrue(carOptional.isPresent());
 
         carOptional.get().
-                setModel(RandomStringUtils.randomAlphabetic(CAR_NAME_SIZE));
+                setModel(RandomStringUtils.randomAlphabetic(CAR_MODEL_SIZE));
 
         // when
         int result = carService.update(carOptional.get());
@@ -130,7 +128,7 @@ public class CarConntrollerIT {
     @Test
     public void shouldDeleteCar() throws Exception {
         // given
-        Car car = new Car(RandomStringUtils.randomAlphabetic(CAR_NAME_SIZE));
+        Car car = new Car(RandomStringUtils.randomAlphabetic(CAR_MODEL_SIZE));
         Integer id = carService.create(car);
 
         List<Car> cars = carService.findAll();
@@ -152,7 +150,7 @@ public class CarConntrollerIT {
     public void shouldReturnCarNotFoundError() throws Exception {
 
         MockHttpServletResponse response =
-                mockMvc.perform(MockMvcRequestBuilders.get(CAR_ENDPOINT + "/999999")
+                mockMvc.perform(MockMvcRequestBuilders.get(CARS_ENDPOINT + "/999999")
                                 .accept(MediaType.APPLICATION_JSON)
                         ).andExpect(status().isNotFound())
                         .andReturn().getResponse();
@@ -164,7 +162,7 @@ public class CarConntrollerIT {
 
     @Test
     public void shouldFailOnCreateCarWithDuplicateName() throws Exception {
-        Car car1 = new Car(RandomStringUtils.randomAlphabetic(CAR_NAME_SIZE));
+        Car car1 = new Car(RandomStringUtils.randomAlphabetic(CAR_MODEL_SIZE));
         Integer id = carService.create(car1);
         assertNotNull(id);
 

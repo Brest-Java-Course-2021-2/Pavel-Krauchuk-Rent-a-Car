@@ -1,6 +1,6 @@
 package com.epam.rest.rest;
 
-import com.epam.rest.CarController;
+import com.epam.brest.rest.CarController;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

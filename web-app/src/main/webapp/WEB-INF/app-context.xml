@@ -24,7 +24,7 @@
         <constructor-arg ref="dataSource"/>
     </bean>
 
-    <bean id="carDtoDao" class="com.epam.rest.dao.CarDtoDaoJdbc">
+    <bean id="carDtoDao" class="com.epam.brest.rest.dao.CarDtoDaoJdbc">
         <constructor-arg ref="namedParameterJdbcTemplate"/>
     </bean>
 

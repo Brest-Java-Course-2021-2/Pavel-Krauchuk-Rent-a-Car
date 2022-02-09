@@ -1,6 +1,6 @@
 package com.epam.brest.service;
 
-import com.epam.rest.model.Car;
+import com.epam.brest.model.Car;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;

@@ -1,8 +1,8 @@
 package com.epam.rest.web_app;
 
-import com.epam.rest.model.Car;
-import com.epam.rest.service.CarDtoService;
-import com.epam.rest.service.CarService;
+import com.epam.brest.model.Car;
+import com.epam.brest.service.CarDtoService;
+import com.epam.brest.service.CarService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;

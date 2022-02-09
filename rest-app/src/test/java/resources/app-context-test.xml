@@ -24,7 +24,7 @@
         <constructor-arg ref="dataSource"/>
     </bean>
 
-    <bean id="carDtoDao" class="com.epam.rest.dao.CarDtoDaoJdbc">
+    <bean id="carDtoDao" class="com.epam.brest.rest.dao.CarDtoDaoJdbc">
         <constructor-arg ref="namedParameterJdbcTemplate"/>
     </bean>
 
@@ -32,7 +32,7 @@
         <constructor-arg name="carDtoDao" ref="carDtoDao"/>
     </bean>
 
-    <bean id="carDao" class="com.epam.rest.dao.CarDaoJDBCImpl">
+    <bean id="carDao" class="com.epam.brest.rest.dao.CarDaoJDBCImpl">
         <constructor-arg ref="namedParameterJdbcTemplate"/>
     </bean>
 
@@ -44,7 +44,7 @@
         <property name="locations">
             <list>
                 <value>classpath*:test-db.properties</value>
-                <value>classpath*:sql-department.properties</value>
+                <value>classpath*:sql-car.properties</value>
             </list>
         </property>
     </bean>

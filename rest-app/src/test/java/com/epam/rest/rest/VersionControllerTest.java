@@ -1,6 +1,6 @@
 package com.epam.rest.rest;
 
-import com.epam.rest.VersionController;
+import com.epam.brest.rest.VersionController;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

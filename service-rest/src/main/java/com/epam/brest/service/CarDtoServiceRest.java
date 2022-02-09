@@ -1,6 +1,6 @@
 package com.epam.brest.service;
 
-import com.epam.rest.model.dto.CarDto;
+import com.epam.brest.model.dto.CarDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;

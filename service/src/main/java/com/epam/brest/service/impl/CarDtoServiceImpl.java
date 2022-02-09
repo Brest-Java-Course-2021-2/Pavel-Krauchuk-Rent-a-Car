@@ -1,8 +1,10 @@
 package com.epam.brest.service.impl;
 
-import com.epam.rest.dao.CarDtoDao;
-import com.epam.rest.model.dto.CarDto;
-import com.epam.rest.service.CarDtoService;
+import com.epam.brest.rest.dao.CarDtoDao;
+import com.epam.brest.model.dto.CarDto;
+import com.epam.brest.service.CarDtoService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,6 +14,8 @@ import java.util.List;
 @Transactional
 public class CarDtoServiceImpl implements CarDtoService {
 
+    private final Logger logger = LogManager.getLogger(CarDtoServiceImpl.class);
+
     private final CarDtoDao carDtoDao;
 
     public CarDtoServiceImpl(CarDtoDao carDtoDao) {
@@ -20,6 +24,7 @@ public class CarDtoServiceImpl implements CarDtoService {
 
     @Override
     public List<CarDto> findByPrice() {
+        logger.debug("findByPrice({})");
         return this.carDtoDao.findByPrice();
     }
 }

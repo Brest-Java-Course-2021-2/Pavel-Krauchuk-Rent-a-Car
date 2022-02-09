@@ -1,8 +1,8 @@
 package com.epam.rest.rest;
 
-import com.epam.rest.CarDtoController;
-import com.epam.rest.model.dto.CarDto;
-import com.epam.rest.service.CarDtoService;
+import com.epam.brest.rest.CarDtoController;
+import com.epam.brest.model.dto.CarDto;
+import com.epam.brest.service.CarDtoService;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

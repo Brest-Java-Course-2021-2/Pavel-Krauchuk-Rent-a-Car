@@ -10,10 +10,6 @@
     <version>1.0-SNAPSHOT</version>
 
     <name>Aggregator for Rent a Car</name>
-    <description>
-        This pom is a maven aggregator that contains all application modules.
-    </description>
-
     <modules>
 
         <module>model</module>
