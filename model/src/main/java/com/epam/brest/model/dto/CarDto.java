@@ -20,6 +20,12 @@ public class CarDto {
         this.price = price;
     }
 
+    public CarDto(Integer carId, String model, BigDecimal price) {
+        this.carId = carId;
+        this.model = model;
+        this.price = price;
+    }
+
     public Integer getCarId() {
         return carId;
     }

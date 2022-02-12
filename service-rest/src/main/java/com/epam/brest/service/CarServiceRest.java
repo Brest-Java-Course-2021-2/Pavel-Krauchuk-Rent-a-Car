@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Service
-public class CarServiceRest {
+public class CarServiceRest implements CarService{
 
     private String url;
 

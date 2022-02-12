@@ -11,6 +11,10 @@ public class Car {
     public Car() {
     }
 
+    public Car(String model) {
+        this.model = model;
+    }
+
     public Car(String model, BigDecimal price) {
         this.model = model;
         this.price = price;

@@ -11,15 +11,17 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.mock.web.MockHttpServletResponse;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -31,8 +33,10 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@SpringBootTest
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(locations = {"classpath:app-context-test.xml"})
+@AutoConfigureMockMvc
+@Transactional
 public class CarConntrollerIT {
 
     public static final String CARS_ENDPOINT = "/cars";
@@ -47,7 +51,7 @@ public class CarConntrollerIT {
 
     private MockMvc mockMvc;
 
-    MockMvc carService = new MockMvc();
+    MockMvcCarService carService = new MockMvcCarService();
 
     @BeforeEach
     public void before() {
@@ -62,7 +66,7 @@ public class CarConntrollerIT {
     public void shouldFindAllCars() throws Exception {
 
         // given
-        Car car = new Car(RandomStringUtils.randomAlphabetic(CAR_MODEL_SIZE));
+        Car car = new Car (RandomStringUtils.randomAlphabetic(CAR_MODEL_SIZE));
         Integer id = carService.create(car);
 
         // when
@@ -182,7 +186,7 @@ public class CarConntrollerIT {
         assertEquals(errorResponse.getMessage(), VALIDATION_ERROR);
     }
 
-    class MockMvcDepartmentService {
+    class MockMvcCarService {
 
         public List<Car> findAll() throws Exception {
             MockHttpServletResponse response = mockMvc.perform(get(CARS_ENDPOINT)

@@ -1,8 +1,9 @@
-package com.epam.rest.web_app;
+package com.epam.brest.web_app;
 
 import com.epam.brest.model.Car;
 import com.epam.brest.service.CarDtoService;
 import com.epam.brest.service.CarService;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import static com.epam.brest.model.constants.CarConstants.CAR_MODEL_SIZE;
 
 @Controller
 public class CarController {
@@ -46,7 +49,7 @@ public class CarController {
     public final String gotoAddCarPage(Model model) {
         logger.debug("gotoAddDCarPage({})", model);
         model.addAttribute("isNew", true);
-        model.addAttribute("car", new Car());
+        model.addAttribute("car", new Car(RandomStringUtils.randomAlphabetic(CAR_MODEL_SIZE)));
         return "car";
     }
 

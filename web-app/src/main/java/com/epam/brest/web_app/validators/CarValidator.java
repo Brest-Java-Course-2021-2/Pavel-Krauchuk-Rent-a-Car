@@ -1,4 +1,4 @@
-package com.epam.rest.web_app.validators;
+package com.epam.brest.web_app.validators;
 
 import com.epam.brest.model.Car;
 import org.springframework.util.StringUtils;

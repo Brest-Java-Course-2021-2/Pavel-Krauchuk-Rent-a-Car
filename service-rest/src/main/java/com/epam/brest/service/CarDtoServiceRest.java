@@ -8,7 +8,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 
 @Service
-public class CarDtoServiceRest {
+public class CarDtoServiceRest implements CarDtoService{
 
     private String url;
 
@@ -25,7 +25,7 @@ public class CarDtoServiceRest {
     }
 
     @Override
-    public List<CarDto> findAllWithAvgSalary() {
+    public List<CarDto> findByPrice() {
         ResponseEntity responseEntity = restTemplate.getForEntity(url, List.class);
         return (List<CarDto>) responseEntity.getBody();
     }
