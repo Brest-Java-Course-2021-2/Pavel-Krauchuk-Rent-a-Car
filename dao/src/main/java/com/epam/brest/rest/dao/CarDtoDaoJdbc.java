@@ -11,7 +11,7 @@ public class CarDtoDaoJdbc implements CarDtoDao{
 
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-    @Value("${findByPriceSql}")
+    @Value("${SQL_FIND_BY_PRICE}")
     private String findByPriceSql;
 
     public CarDtoDaoJdbc(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {

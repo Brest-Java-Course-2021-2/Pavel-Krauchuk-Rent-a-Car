@@ -1,6 +1,7 @@
 package com.epam.brest.web_app.validators;
 
 import com.epam.brest.model.Car;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
@@ -8,6 +9,7 @@ import org.springframework.validation.Validator;
 
 import static com.epam.brest.model.constants.CarConstants.CAR_MODEL_SIZE;
 
+@Component
 public class CarValidator implements Validator {
 
     @Override

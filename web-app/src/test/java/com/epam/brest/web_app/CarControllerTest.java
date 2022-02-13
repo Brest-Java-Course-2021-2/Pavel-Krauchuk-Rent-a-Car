@@ -89,22 +89,7 @@ public class CarControllerTest {
                                 hasProperty("model", is(d1.getModel())),
                                 hasProperty("price", is(d1.getPrice()))
                         )
-                )))
-//                .andExpect(model().attribute("departments", hasItem(
-//                        allOf(
-//                                hasProperty("departmentId", is(d2.getDepartmentId())),
-//                                hasProperty("departmentName", is(d2.getDepartmentName())),
-//                                hasProperty("avgSalary", is(d2.getAvgSalary()))
-//                        )
-//                )))
-//                .andExpect(model().attribute("departments", hasItem(
-//                        allOf(
-//                                hasProperty("departmentId", is(d3.getDepartmentId())),
-//                                hasProperty("departmentName", is(d3.getDepartmentName())),
-//                                hasProperty("avgSalary", isEmptyOrNullString())
-//                        )
-//                )))
-        ;
+                )));
 
         mockServer.verify();
     }
@@ -124,7 +109,7 @@ public class CarControllerTest {
         // THEN
         //Integer newDepartmentId = departmentService.create(department);
         mockMvc.perform(
-                        MockMvcRequestBuilders.post("/department")
+                        MockMvcRequestBuilders.post("/car")
                                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                                 .param("model", car.getModel())
                 ).andDo(MockMvcResultHandlers.print())
@@ -144,7 +129,7 @@ public class CarControllerTest {
 
         // THEN
         mockMvc.perform(
-                        MockMvcRequestBuilders.post("/department")
+                        MockMvcRequestBuilders.post("/car")
                                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                                 .param("model", car.getModel())
                 ).andDo(MockMvcResultHandlers.print())
@@ -159,7 +144,7 @@ public class CarControllerTest {
 
     @Test
     public void shouldOpenEditCarPageById() throws Exception {
-        Car d = createCar(1, "MODEL T");
+        Car d = createCar(1, "MODEL T", BigDecimal.valueOf(99.99));
         mockServer.expect(ExpectedCount.once(), requestTo(new URI(CARS_URL + "/" + d.getCarId())))
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withStatus(HttpStatus.OK)
@@ -175,7 +160,9 @@ public class CarControllerTest {
                 .andExpect(view().name("car"))
                 .andExpect(model().attribute("isNew", is(false)))
                 .andExpect(model().attribute("car", hasProperty("carId", is(1))))
-                .andExpect(model().attribute("car", hasProperty("model", is("MODEL T"))));
+                .andExpect(model().attribute("car", hasProperty("model", is("MODEL T"))))
+                .andExpect(model().attribute("car", hasProperty("price", is("99.99"))));;
+
     }
 
     @Test
@@ -190,7 +177,7 @@ public class CarControllerTest {
         String testName = RandomStringUtils.randomAlphabetic(CAR_MODEL_SIZE);
 
         mockMvc.perform(
-                        MockMvcRequestBuilders.post("/department/1")
+                        MockMvcRequestBuilders.post("/car/1")
                                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                                 .param("carId", "1")
                                 .param("model", testName)
@@ -229,10 +216,11 @@ public class CarControllerTest {
         return carDto;
     }
 
-    private Car createCar(int id, String model) {
+    private Car createCar(int id, String model, BigDecimal price) {
         Car car = new Car();
         car.setCarId(id);
         car.setModel(model);
+        car.setPrice(price);
         return car;
     }
 }

@@ -44,7 +44,6 @@ public class CarServiceRest implements CarService{
 
     @Override
     public Integer update(Car car) {
-        // restTemplate.put(url, department);
 
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
@@ -55,7 +54,6 @@ public class CarServiceRest implements CarService{
 
     @Override
     public Integer delete(Integer carId) {
-        //restTemplate.delete(url + "/" + departmentId);
 
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));

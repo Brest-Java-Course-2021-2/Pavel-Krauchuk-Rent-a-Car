@@ -1,4 +1,4 @@
 /**
- * REST controllers.
+ * REST exception.
  */
 package com.epam.brest.rest;

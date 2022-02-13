@@ -3,16 +3,15 @@ package com.epam.brest.web_app;
 import com.epam.brest.model.Car;
 import com.epam.brest.service.CarDtoService;
 import com.epam.brest.service.CarService;
-import org.apache.commons.lang3.RandomStringUtils;
+import com.epam.brest.web_app.validators.CarValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import static com.epam.brest.model.constants.CarConstants.CAR_MODEL_SIZE;
 
 @Controller
 public class CarController {
@@ -23,12 +22,14 @@ public class CarController {
 
     private final CarService carService;
 
-    //private final CarValidator carValidator;
+    private final CarValidator carValidator;
 
     public CarController (CarDtoService carDtoService,
-                          CarService carService){
+                          CarService carService,
+                          CarValidator carValidator){
         this.carDtoService = carDtoService;
         this.carService = carService;
+        this.carValidator = carValidator;
     }
 
     @GetMapping(value = "/cars")
@@ -49,22 +50,33 @@ public class CarController {
     public final String gotoAddCarPage(Model model) {
         logger.debug("gotoAddDCarPage({})", model);
         model.addAttribute("isNew", true);
-        model.addAttribute("car", new Car(RandomStringUtils.randomAlphabetic(CAR_MODEL_SIZE)));
+        model.addAttribute("car", new Car());
         return "car";
     }
 
     @PostMapping(value = "/car")
-    public String addCar (Car car) {
+    public String addCar (Car car, BindingResult result) {
 
         logger.debug("addCar({}, {})", car);
+        carValidator.validate(car, result);
+        if (result.hasErrors()) {
+            return "car";
+        }
+
         this.carService.create(car);
         return "redirect:/cars";
     }
 
     @PostMapping(value = "/car/{id}")
-    public String updateCar(Car car) {
+    public String updateCar(Car car, BindingResult result) {
 
         logger.debug("updatecar({}, {})", car);
+        carValidator.validate(car, result);
+
+        if (result.hasErrors()) {
+            return "car";
+        }
+
         this.carService.update(car);
         return "redirect:/cars";
     }
