@@ -9,6 +9,8 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -39,15 +41,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Transactional
 public class CarControllerTest {
 
-//    private static final Logger LOGGER = (Logger) LoggerFactory.getLogger(CarControllerTest.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CarControllerTest.class);
 
     public static final String CAR_ENDPOINT = "/cars";
 
     @Autowired
     private CarController carController;
-
-    @Autowired
-    private CarDtoController carDtoController;
 
     @Autowired
     private CustomExceptionHandler customExceptionHandler;
