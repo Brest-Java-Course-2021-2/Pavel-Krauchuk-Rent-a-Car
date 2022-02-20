@@ -30,8 +30,8 @@
                            th:href="@{/cars}">Cars</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="order.html"
-                           th:href="@{/order}">Order a car</a>
+                        <a class="nav-link" href="orders.html"
+                           th:href="@{/order}">Orders</a>
                     </li>
                 </ul>
             </div>
@@ -51,7 +51,7 @@
     </nav>
 </header>
 
-<section id="department">
+<section id="model">
     <div class="container-fluid">
         <div class="row">
             <div class="col">
@@ -66,53 +66,48 @@
                             <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
                                 <p>Please enter your personal information:</p>
                             </div>
-
-                            <input id="field_firstName"
+                            <input id="field_name"
                                    type="hidden"
-                                   th:field="*{firstName}"/>
-
+                                   th:field="*{name}"/>
                             <div class="mb-3">
                                 <label class="form-label"
-                                       for="field_firstName">First name</label>
+                                       for="field_name">Name</label>
                                 <input class="form-control "
-                                       id="field_firstName"
-                                       type="text" value="IVAN"
-                                       th:field="*{firstName}"/>
-                                <div th:if="${#fields.hasErrors('firstName')}"
+                                       id="field_name"
+                                       type="text" value="IVANOV IVAN"
+                                       th:field="*{name}"/>
+                                <div th:if="${#fields.hasErrors('name')}"
                                      class="text-danger"
-                                     th:errors="*{firstName}">[errors]</div>
+                                     th:errors="*{name}">[errors]</div>
                             </div>
 
-                            <input id="field_lastName"
+                            <input id="field_"
                                    type="hidden"
-                                   th:field="*{lastName}"/>
+                                   th:field="*{model}"/>
 
                             <div class="mb-3">
                                 <label class="form-label"
-                                       for="field_lastName">Last name</label>
+                                       for="field_model">Model</label>
                                 <input class="form-control "
-                                       id="field_lastName"
-                                       type="text" value="IVANOV"
-                                       th:field="*{lastName}"/>
-                                <div th:if="${#fields.hasErrors('lastName')}"
+                                       id="field_model"
+                                       type="text" value="KIA"
+                                       th:field="*{model}"/>
+                                <div th:if="${#fields.hasErrors('model')}"
                                      class="text-danger"
-                                     th:errors="*{lastName}">[errors]</div>
+                                     th:errors="*{}">[errors]</div>
                             </div>
 
-                            <input id="field_address"
+                            <input id="field_rentalPeriod"
                                    type="hidden"
-                                   th:field="*{address}"/>
+                                   th:field="*{rentalPeriod}"/>
 
                             <div class="mb-3">
                                 <label class="form-label"
-                                       for="field_Address">Address</label>
+                                       for="field_rentalPeriod">Rental period, day</label>
                                 <input class="form-control "
-                                       id="field_address"
-                                       type="text" value="LENINA 15-3"
-                                       th:field="*{address}"/>
-                                <div th:if="${#fields.hasErrors('address')}"
-                                     class="text-danger"
-                                     th:errors="*{address}">[errors]</div>
+                                       id="field_rentalPeriod"
+                                       type="text" value="5"
+                                       th:field="*{rentalPeriod}"/>
                             </div>
 
                             <div class="d-flex justify-content-end">

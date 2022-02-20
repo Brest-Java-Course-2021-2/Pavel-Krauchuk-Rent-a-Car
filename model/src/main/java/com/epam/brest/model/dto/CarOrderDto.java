@@ -1,27 +1,18 @@
 package com.epam.brest.model.dto;
 
-import com.epam.brest.model.OrderStatus;
-
-import java.util.Date;
-
 public class CarOrderDto {
 
     private Integer orderId;
-    private Date date;
     private String customer;
     private Integer carId;
-    private OrderStatus orderStatus;
     private Integer rentalPeriod;
 
     public CarOrderDto() {
     }
 
-    public CarOrderDto(Integer orderId, Date date, String customer, Integer carId, OrderStatus orderStatus, Integer rentalPeriod) {
-        this.orderId = orderId;
-        this.date = date;
+    public CarOrderDto(String customer, Integer carId, Integer rentalPeriod) {
         this.customer = customer;
         this.carId = carId;
-        this.orderStatus = orderStatus;
         this.rentalPeriod = rentalPeriod;
     }
 
@@ -31,14 +22,6 @@ public class CarOrderDto {
 
     public void setOrderId(Integer orderId) {
         this.orderId = orderId;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
     }
 
     public String getCustomer() {
@@ -55,14 +38,6 @@ public class CarOrderDto {
 
     public void setCarId(Integer carId) {
         this.carId = carId;
-    }
-
-    public OrderStatus getOrderStatus() {
-        return orderStatus;
-    }
-
-    public void setOrderStatus(OrderStatus orderStatus) {
-        this.orderStatus = orderStatus;
     }
 
     public Integer getRentalPeriod() {

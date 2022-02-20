@@ -41,7 +41,7 @@ public class CarController {
     @GetMapping(value = "/car/{id}")
     public final String gotoEditCarPage (@PathVariable Integer id, Model model){
             logger.debug("gotoEditCarPage({})", model);
-            model.addAttribute("isNew", true);
+            model.addAttribute("isNew", false);
             model.addAttribute("car", carService.getCarById(id));
             return "car";
         }
