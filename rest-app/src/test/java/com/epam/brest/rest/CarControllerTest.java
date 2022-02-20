@@ -24,6 +24,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -74,7 +75,7 @@ public class CarControllerTest {
     public void shouldFindAllDepartments() throws Exception {
 
         // given
-        Car car = new Car(RandomStringUtils.randomAlphabetic(CAR_MODEL_SIZE));
+        Car car = new Car("MODEL T", BigDecimal.valueOf(99.50));
         Integer id = carService.create(car);
 
         // when
@@ -86,8 +87,8 @@ public class CarControllerTest {
     }
 
     @Test
-    public void shouldCreateDepartment() throws Exception {
-        Car car = new Car(RandomStringUtils.randomAlphabetic(CAR_MODEL_SIZE));
+    public void shouldCreateCar() throws Exception {
+        Car car = new Car("Model T", BigDecimal.valueOf(99.50));
         Integer id = carService.create(car);
         assertNotNull(id);
     }

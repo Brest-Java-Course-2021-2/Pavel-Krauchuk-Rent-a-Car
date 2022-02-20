@@ -1,13 +1,12 @@
 package com.epam.brest.service.config;
 
 
-import com.epam.brest.rest.dao.CarDao;
-import com.epam.brest.rest.dao.CarDaoJDBCImpl;
-import com.epam.brest.rest.dao.CarDtoDao;
-import com.epam.brest.rest.dao.CarDtoDaoJdbc;
+import com.epam.brest.rest.dao.*;
 import com.epam.brest.service.CarDtoService;
 import com.epam.brest.service.CarService;
+import com.epam.brest.service.CarOrderService;
 import com.epam.brest.service.impl.CarDtoServiceImpl;
+import com.epam.brest.service.impl.CarOrderServiceImpl;
 import com.epam.brest.service.impl.CarServiceImpl;
 import com.epam.brest.testdb.SpringJdbcConfig;
 import org.springframework.boot.test.context.TestConfiguration;
@@ -33,5 +32,15 @@ public class ServiceTestConfig extends SpringJdbcConfig{
     @Bean
     CarService carService() {
         return new CarServiceImpl(carDao());
+    }
+
+    @Bean
+    CarOrderDaoJDBCImpl carOrderDao() {
+        return new CarOrderDaoJDBCImpl(namedParameterJdbcTemplate());
+    }
+
+    @Bean
+    CarOrderService carOrderService() {
+        return new CarOrderServiceImpl(carOrderDao());
     }
 }

@@ -59,6 +59,7 @@ public class CarController {
 
         logger.debug("addCar({}, {})", car);
         carValidator.validate(car, result);
+
         if (result.hasErrors()) {
             return "car";
         }
@@ -70,7 +71,7 @@ public class CarController {
     @PostMapping(value = "/car/{id}")
     public String updateCar(Car car, BindingResult result) {
 
-        logger.debug("updatecar({}, {})", car);
+        logger.debug("updateCar({}, {})", car);
         carValidator.validate(car, result);
 
         if (result.hasErrors()) {

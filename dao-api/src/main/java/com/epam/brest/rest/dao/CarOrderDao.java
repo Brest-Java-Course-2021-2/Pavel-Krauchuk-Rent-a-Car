@@ -8,9 +8,11 @@ public interface CarOrderDao {
 
     List<CarOrder> findAllOrder();
 
+    CarOrder getOrderById (Integer orderId);
+
     Integer createOrder(CarOrder carOrder);
 
     Integer updateOrder(CarOrder carOrder);
 
-    Integer deleteOrder (Integer carOrder);
+    Integer deleteOrder (Integer orderId);
 }

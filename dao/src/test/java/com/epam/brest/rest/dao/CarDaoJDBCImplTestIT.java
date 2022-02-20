@@ -36,6 +36,7 @@ class CarDaoJDBCImplTestIT {
     public CarDaoJDBCImplTestIT(@Autowired CarDao carDaoJDBC) {
         this.carDaoJDBC = (CarDaoJDBCImpl) carDaoJDBC;
     }
+
     @Test
     void findAll() {
         logger.debug("Execute test: findAll()");

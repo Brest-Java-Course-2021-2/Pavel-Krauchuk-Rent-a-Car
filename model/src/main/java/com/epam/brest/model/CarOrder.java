@@ -1,27 +1,26 @@
 package com.epam.brest.model;
 
-import java.math.BigDecimal;
-import java.util.Date;
-
 public class CarOrder {
 
     private Integer orderId;
-    private Date date;
-    private Integer customerId;
+    private String customer;
     private Integer carId;
-    private OrderStatus orderStatus;
-    private BigDecimal totalPrice;
+    private Integer rentalPeriod;
 
     public CarOrder() {
     }
 
-    public CarOrder(Integer orderId, Date date, Integer customerId, Integer carId, OrderStatus orderStatus, BigDecimal totalPrice) {
-        this.orderId = orderId;
-        this.date = date;
-        this.customerId = customerId;
+    public CarOrder(String customer, Integer carId, Integer rentalPeriod) {
+        this.customer = customer;
         this.carId = carId;
-        this.orderStatus = orderStatus;
-        this.totalPrice = totalPrice;
+        this.rentalPeriod = rentalPeriod;
+    }
+
+    public CarOrder(Integer orderId, String customer, Integer carId, Integer rentalPeriod) {
+        this.orderId = orderId;
+        this.customer = customer;
+        this.carId = carId;
+        this.rentalPeriod = rentalPeriod;
     }
 
     public Integer getOrderId() {
@@ -31,20 +30,13 @@ public class CarOrder {
     public void setOrderId(Integer orderId) {
         this.orderId = orderId;
     }
-    public Date getDate() {
-        return date;
+
+    public String getCustomer() {
+        return customer;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public Integer getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(Integer customerId) {
-        this.customerId = customerId;
+    public void setCustomer(String customer) {
+        this.customer = customer;
     }
 
     public Integer getCarId() {
@@ -55,19 +47,11 @@ public class CarOrder {
         this.carId = carId;
     }
 
-    public OrderStatus getOrderStatus() {
-        return orderStatus;
+    public Integer getRentalPeriod() {
+        return rentalPeriod;
     }
 
-    public void setOrderStatus(OrderStatus orderStatus) {
-        this.orderStatus = orderStatus;
-    }
-
-    public BigDecimal getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(BigDecimal totalPrice) {
-        this.totalPrice = totalPrice;
+    public void setRentalPeriod(Integer rentalPeriod) {
+        this.rentalPeriod = rentalPeriod;
     }
 }

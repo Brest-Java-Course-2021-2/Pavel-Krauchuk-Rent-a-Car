@@ -69,7 +69,7 @@ public class CarControllerTest {
 
         CarDto d1 = createCarDto(1, "KIA", BigDecimal.valueOf(19.50));
         CarDto d2 = createCarDto(2, "LADA", BigDecimal.valueOf(14.10));
-        CarDto d3 = createCarDto(3, "MODEL T", BigDecimal.valueOf(90.50));
+        CarDto d3 = createCarDto(3, "MODEL T", null);
         mockServer.expect(ExpectedCount.once(), requestTo(new URI(CAR_DTOS_URL)))
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withStatus(HttpStatus.OK)
@@ -90,7 +90,6 @@ public class CarControllerTest {
                                 hasProperty("price", is(d1.getPrice()))
                         )
                 )));
-
         mockServer.verify();
     }
 
@@ -125,7 +124,7 @@ public class CarControllerTest {
     @Test
     void shouldFailAddCarOnEmptyName() throws Exception {
         // WHEN
-        Car car = new Car("MODEL T");
+        Car car = new Car("");
 
         // THEN
         mockMvc.perform(
@@ -144,7 +143,7 @@ public class CarControllerTest {
 
     @Test
     public void shouldOpenEditCarPageById() throws Exception {
-        Car d = createCar(1, "MODEL T", BigDecimal.valueOf(99.99));
+        Car d = createCar(1, "MODEL T");
         mockServer.expect(ExpectedCount.once(), requestTo(new URI(CARS_URL + "/" + d.getCarId())))
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withStatus(HttpStatus.OK)
@@ -158,12 +157,9 @@ public class CarControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType("text/html;charset=UTF-8"))
                 .andExpect(view().name("car"))
-                .andExpect(model().attribute("isNew", is(false)))
                 .andExpect(model().attribute("car", hasProperty("carId", is(1))))
-                .andExpect(model().attribute("car", hasProperty("model", is("MODEL T"))))
-                .andExpect(model().attribute("car", hasProperty("price", is("99.99"))));;
-
-    }
+                .andExpect(model().attribute("car", hasProperty("model", is("MODEL T"))));
+            }
 
     @Test
     public void shouldUpdateCarAfterEdit() throws Exception {
@@ -216,11 +212,10 @@ public class CarControllerTest {
         return carDto;
     }
 
-    private Car createCar(int id, String model, BigDecimal price) {
+    private Car createCar(int id, String model) {
         Car car = new Car();
         car.setCarId(id);
         car.setModel(model);
-        car.setPrice(price);
         return car;
     }
 }

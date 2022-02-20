@@ -1,32 +1,36 @@
 package com.epam.brest.model.dto;
 
-import com.epam.brest.model.Car;
-import com.epam.brest.model.Customer;
 import com.epam.brest.model.OrderStatus;
 
 import java.util.Date;
 
 public class CarOrderDto {
 
-    private Integer orderCarId;
+    private Integer orderId;
     private Date date;
-    private com.epam.brest.model.Customer customer;
-    private Car car;
-    private com.epam.brest.model.OrderStatus orderStatus;
+    private String customer;
+    private Integer carId;
+    private OrderStatus orderStatus;
+    private Integer rentalPeriod;
 
-    public CarOrderDto(Date date, com.epam.brest.model.Customer customer, Car car, com.epam.brest.model.OrderStatus orderStatus) {
+    public CarOrderDto() {
+    }
+
+    public CarOrderDto(Integer orderId, Date date, String customer, Integer carId, OrderStatus orderStatus, Integer rentalPeriod) {
+        this.orderId = orderId;
         this.date = date;
         this.customer = customer;
-        this.car = car;
+        this.carId = carId;
         this.orderStatus = orderStatus;
+        this.rentalPeriod = rentalPeriod;
     }
 
-    public Integer getOrderCarId() {
-        return orderCarId;
+    public Integer getOrderId() {
+        return orderId;
     }
 
-    public void setOrderCarId(Integer orderCarId) {
-        this.orderCarId = orderCarId;
+    public void setOrderId(Integer orderId) {
+        this.orderId = orderId;
     }
 
     public Date getDate() {
@@ -37,23 +41,23 @@ public class CarOrderDto {
         this.date = date;
     }
 
-    public com.epam.brest.model.Customer getCustomer() {
+    public String getCustomer() {
         return customer;
     }
 
-    public void setCustomer(Customer customer) {
+    public void setCustomer(String customer) {
         this.customer = customer;
     }
 
-    public Car getCar() {
-        return car;
+    public Integer getCarId() {
+        return carId;
     }
 
-    public void setCar(Car car) {
-        this.car = car;
+    public void setCarId(Integer carId) {
+        this.carId = carId;
     }
 
-    public com.epam.brest.model.OrderStatus getOrderStatus() {
+    public OrderStatus getOrderStatus() {
         return orderStatus;
     }
 
@@ -61,14 +65,11 @@ public class CarOrderDto {
         this.orderStatus = orderStatus;
     }
 
-    @Override
-    public String toString() {
-        return "CarOrderDto{" +
-                "orderCarId=" + orderCarId +
-                ", date=" + date +
-                ", customer=" + customer +
-                ", car=" + car +
-                ", orderStatus=" + orderStatus +
-                '}';
+    public Integer getRentalPeriod() {
+        return rentalPeriod;
+    }
+
+    public void setRentalPeriod(Integer rentalPeriod) {
+        this.rentalPeriod = rentalPeriod;
     }
 }
