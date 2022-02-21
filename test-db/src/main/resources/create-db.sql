@@ -11,6 +11,7 @@ CREATE TABLE CAR (
 
 CREATE TABLE ORDER_CAR (
     order_id INT NOT NULL AUTO_INCREMENT,
+    date_order TIMESTAMP NOT NULL,
     customer varchar(255) NOT NULL,
     car_id INT NOT NULL,
     rental_period INT NOT NULL,

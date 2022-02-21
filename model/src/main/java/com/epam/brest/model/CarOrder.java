@@ -1,8 +1,11 @@
 package com.epam.brest.model;
 
+import java.time.Instant;
+
 public class CarOrder {
 
     private Integer orderId;
+    private Instant dateOrder;
     private String customer;
     private Integer carId;
     private Integer rentalPeriod;
@@ -16,7 +19,15 @@ public class CarOrder {
         this.rentalPeriod = rentalPeriod;
     }
 
-    public CarOrder(Integer orderId, String customer, Integer carId, Integer rentalPeriod) {
+    public CarOrder(Instant dareOrder, String customer, Integer carId, Integer rentalPeriod) {
+        this.dateOrder = dareOrder;
+        this.customer = customer;
+        this.carId = carId;
+        this.rentalPeriod = rentalPeriod;
+    }
+
+    public CarOrder(Integer orderId, Instant dareOrder, String customer, Integer carId, Integer rentalPeriod) {
+        this.dateOrder = dareOrder;
         this.orderId = orderId;
         this.customer = customer;
         this.carId = carId;
@@ -29,6 +40,14 @@ public class CarOrder {
 
     public void setOrderId(Integer orderId) {
         this.orderId = orderId;
+    }
+
+    public Instant getDateOrder() {
+        return dateOrder;
+    }
+
+    public void setDateOrder(Instant dateOrder) {
+        this.dateOrder = dateOrder;
     }
 
     public String getCustomer() {

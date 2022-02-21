@@ -59,6 +59,7 @@ public class CarOrderDaoJDBCImpl implements CarOrderDao{
     public Integer createOrder(CarOrder carOrder) {
         logger.debug("Create order: {}", carOrder);
         SqlParameterSource sqlParameterSource = new MapSqlParameterSource()
+                .addValue("dateOrder", carOrder.getDateOrder())
                 .addValue("customer", carOrder.getCustomer())
                 .addValue("carId", carOrder.getCarId())
                 .addValue("rentalPeriod", carOrder.getRentalPeriod());
@@ -72,6 +73,7 @@ public class CarOrderDaoJDBCImpl implements CarOrderDao{
         logger.debug("Update order: {}", carOrder);
         SqlParameterSource sqlParameterSource = new MapSqlParameterSource()
                 .addValue("orderId", carOrder.getOrderId())
+                .addValue("dateOrder", carOrder.getDateOrder())
                 .addValue("customer", carOrder.getCustomer())
                 .addValue("carId", carOrder.getCarId())
                 .addValue("rentalPeriod", carOrder.getRentalPeriod());
@@ -93,6 +95,7 @@ public class CarOrderDaoJDBCImpl implements CarOrderDao{
         public CarOrder mapRow(ResultSet resultSet, int i) throws SQLException {
             CarOrder carOrder = new CarOrder();
             carOrder.setOrderId(resultSet.getInt("order_id"));
+            carOrder.setDateOrder(resultSet.getTimestamp("date_order").toInstant());
             carOrder.setCustomer(resultSet.getString("customer"));
             carOrder.setCarId(resultSet.getInt("car_id"));
             carOrder.setRentalPeriod(resultSet.getInt("rental_period"));

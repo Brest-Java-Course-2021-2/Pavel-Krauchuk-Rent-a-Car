@@ -1,8 +1,11 @@
 package com.epam.brest.model.dto;
 
+import java.time.Instant;
+
 public class CarOrderDto {
 
     private Integer orderId;
+    private Instant dateOrder;
     private String customer;
     private Integer carId;
     private Integer rentalPeriod;
@@ -10,7 +13,8 @@ public class CarOrderDto {
     public CarOrderDto() {
     }
 
-    public CarOrderDto(String customer, Integer carId, Integer rentalPeriod) {
+    public CarOrderDto(Instant dateOrder, String customer, Integer carId, Integer rentalPeriod) {
+        this.dateOrder = dateOrder;
         this.customer = customer;
         this.carId = carId;
         this.rentalPeriod = rentalPeriod;
@@ -22,6 +26,14 @@ public class CarOrderDto {
 
     public void setOrderId(Integer orderId) {
         this.orderId = orderId;
+    }
+
+    public Instant getDateOrder() {
+        return dateOrder;
+    }
+
+    public void setDateOrder(Instant dateOrder) {
+        this.dateOrder = dateOrder;
     }
 
     public String getCustomer() {

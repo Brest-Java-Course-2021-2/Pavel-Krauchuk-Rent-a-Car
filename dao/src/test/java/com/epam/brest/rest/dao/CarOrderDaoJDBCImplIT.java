@@ -14,6 +14,7 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Instant;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -45,6 +46,15 @@ class CarOrderDaoJDBCImplIT {
 
     @Test
     void findOrderById() {
+        logger.debug("Execute test: getOrderCarById()");
+        List<CarOrder> orders = carOrderDaoJDBC.findAllOrder();
+        if (orders.size()==0){
+            carOrderDaoJDBC.createOrder(new CarOrder(Instant.parse("2022-01-22T12:00:00Z"), "JAMES BOND",1, 1));
+            orders = carOrderDaoJDBC.findAllOrder();
+        }
+        CarOrder orderSrc = orders.get(0);
+        CarOrder orderDst = carOrderDaoJDBC.getOrderById(orderSrc.getOrderId());
+        assertEquals(orderSrc.getCustomer(), orderDst.getCustomer());
     }
 
     @Test
@@ -52,7 +62,7 @@ class CarOrderDaoJDBCImplIT {
         logger.debug("Execute test: create()");
         assertNotNull(carOrderDaoJDBC);
         Integer carOrderSizeBefore = carOrderDaoJDBC.findAllOrder().size();
-        CarOrder carOrder = new CarOrder("JAMES BOND", 1, 1);
+        CarOrder carOrder = new CarOrder(Instant.parse("2022-01-22T12:00:00Z"), "JAMES BOND",1, 1);
         Integer newOrderId = carOrderDaoJDBC.createOrder(carOrder);
         assertNotNull(newOrderId);
         assertEquals((int) carOrderSizeBefore, carOrderDaoJDBC.findAllOrder().size() - 1);
@@ -63,7 +73,7 @@ class CarOrderDaoJDBCImplIT {
         logger.debug("Execute test: update()");
         List<CarOrder> orders = carOrderDaoJDBC.findAllOrder();
         if (orders.size()==0){
-            carOrderDaoJDBC.createOrder(new CarOrder("JAMES BOND", 1, 1));
+            carOrderDaoJDBC.createOrder(new CarOrder(Instant.parse("2022-01-19T12:00:00Z"), "JAMES BOND", 1, 1));
             orders = carOrderDaoJDBC.findAllOrder();
         }
         CarOrder orderSrc = orders.get(0);
@@ -78,7 +88,7 @@ class CarOrderDaoJDBCImplIT {
     @Test
     void deleteOrder() {
         logger.debug("Execute test: delete order()");
-        carOrderDaoJDBC.createOrder(new CarOrder("JAMES BOND", 1, 1));
+        carOrderDaoJDBC.createOrder(new CarOrder(Instant.parse("2022-01-19T12:00:00Z"),"JAMES BOND", 1, 1));
         List<CarOrder> orders = carOrderDaoJDBC.findAllOrder();
         carOrderDaoJDBC.deleteOrder(orders.get(orders.size()-1).getOrderId());
         assertEquals(orders.size()-1, carOrderDaoJDBC.findAllOrder().size());

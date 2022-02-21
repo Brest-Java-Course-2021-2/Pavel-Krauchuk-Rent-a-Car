@@ -13,6 +13,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Instant;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -38,7 +39,7 @@ class CarOrderServiceImplIT {
         logger.debug("Execute test: getCarOrderById()");
         List<CarOrder> orders = carOrderService.findAllOrder();
         if (orders.size()==0){
-            carOrderService.createOrder(new CarOrder("JAMES BOND", 1, 1));
+            carOrderService.createOrder(new CarOrder(Instant.parse("2022-01-22T12:00:00Z"), "JAMES BOND",1, 1));
             orders = carOrderService.findAllOrder();
         }
         CarOrder orderSrc = orders.get(0);
@@ -52,7 +53,7 @@ class CarOrderServiceImplIT {
         assertNotNull(carOrderService);
         Integer carOrderSizeBefore = carOrderService.findAllOrder().size();
         assertNotNull(carOrderSizeBefore);
-        CarOrder carOrder = new CarOrder("JAMES BOND", 1, 1);
+        CarOrder carOrder = new CarOrder(Instant.parse("2022-01-22T12:00:00Z"), "JAMES BOND",1, 1);
         Integer newOrderId = carOrderService.createOrder(carOrder);
         assertNotNull(newOrderId);
         assertEquals(carOrderSizeBefore, carOrderService.findAllOrder().size() - 1);
@@ -63,7 +64,7 @@ class CarOrderServiceImplIT {
         logger.debug("Execute test: carOrderService.update()");
         List<CarOrder> orders = carOrderService.findAllOrder();
         if (orders.size()==0){
-            carOrderService.createOrder(new CarOrder("JAMES BOND", 1, 1));
+            carOrderService.createOrder(new CarOrder(Instant.parse("2022-01-22T12:00:00Z"), "JAMES BOND",1, 1));
             orders = carOrderService.findAllOrder();
         }
         CarOrder orderSrc = orders.get(0);
@@ -77,7 +78,7 @@ class CarOrderServiceImplIT {
     @Test
     void deleteOrder() {
         logger.debug("Execute test: deleteOrder()");
-        carOrderService.createOrder(new CarOrder("JAMES BOND", 1, 1));
+        carOrderService.createOrder(new CarOrder(Instant.parse("2022-01-22T12:00:00Z"), "JAMES BOND",1, 1));
         List<CarOrder> orders = carOrderService.findAllOrder();
         carOrderService.deleteOrder(orders.get(orders.size()-1).getOrderId());
         assertEquals(orders.size()-1, carOrderService.findAllOrder().size());
