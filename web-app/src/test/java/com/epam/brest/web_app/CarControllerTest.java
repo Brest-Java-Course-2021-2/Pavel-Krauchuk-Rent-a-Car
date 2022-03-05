@@ -27,17 +27,11 @@ import java.net.URI;
 import java.util.Arrays;
 
 import static com.epam.brest.model.constants.CarConstants.CAR_MODEL_SIZE;
-import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.hasItem;
-import static org.hamcrest.Matchers.hasProperty;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withStatus;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
 @Disabled
@@ -104,9 +98,6 @@ public class CarControllerTest {
                 );
 
         Car car = new Car("MODEL T");
-
-        // THEN
-        //Integer newDepartmentId = departmentService.create(department);
         mockMvc.perform(
                         MockMvcRequestBuilders.post("/car")
                                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -119,26 +110,6 @@ public class CarControllerTest {
 
         // VERIFY
         mockServer.verify();
-    }
-
-    @Test
-    void shouldFailAddCarOnEmptyName() throws Exception {
-        // WHEN
-        Car car = new Car("");
-
-        // THEN
-        mockMvc.perform(
-                        MockMvcRequestBuilders.post("/car")
-                                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-                                .param("model", car.getModel())
-                ).andDo(MockMvcResultHandlers.print())
-                .andExpect(status().isOk())
-                .andExpect(view().name("car"))
-                .andExpect(
-                        model().attributeHasFieldErrors(
-                                "car", "model"
-                        )
-                );
     }
 
     @Test
@@ -160,6 +131,26 @@ public class CarControllerTest {
                 .andExpect(model().attribute("car", hasProperty("carId", is(1))))
                 .andExpect(model().attribute("car", hasProperty("model", is("MODEL T"))));
             }
+
+    @Test
+    void shouldFailAddCarOnEmptyName() throws Exception {
+        // WHEN
+        Car car = new Car("");
+
+        // THEN
+        mockMvc.perform(
+                        MockMvcRequestBuilders.post("/car")
+                                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                                .param("model", car.getModel())
+                ).andDo(MockMvcResultHandlers.print())
+                .andExpect(status().isOk())
+                .andExpect(view().name("car"))
+                .andExpect(
+                        model().attributeHasFieldErrors(
+                                "car", "model"
+                        )
+                );
+    }
 
     @Test
     public void shouldUpdateCarAfterEdit() throws Exception {
